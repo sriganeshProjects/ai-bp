@@ -1,0 +1,29 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+
+# Simulated dataset (e.g., age, weight as features)
+X = np.random.rand(100, 2) * 100
+y = 0.3 * X[:, 0] + 0.7 * X[:, 1] + 40 + np.random.randn(100) * 5  # Simulated BP
+
+# Train-test split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# Train model
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+# Predict
+y_pred = model.predict(X_test)
+
+# Plot True vs Predicted
+plt.figure(figsize=(6, 6))
+plt.scatter(y_test, y_pred, color='blue', alpha=0.6)
+plt.plot([min(y_test), max(y_test)], [min(y_test), max(y_test)], 'r--')  # Diagonal
+plt.title("True vs Predicted Blood Pressure")
+plt.xlabel("True BP")
+plt.ylabel("Predicted BP")
+plt.grid(True)
+plt.show()
+
